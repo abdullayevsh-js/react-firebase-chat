@@ -1,0 +1,93 @@
+/* Main two-panel layout - Full screen professional appearance */
+.app-main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-medium) 50%, var(--background-light) 100%);
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  animation: appFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes appFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+
+/* Sidebar - 30% width */
+.app-sidebar {
+  width: 30%;
+  height: 100vh;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  animation: sidebarSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes sidebarSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Chat area - 70% width */
+.app-chat {
+  width: 70%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  animation: chatAreaSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes chatAreaSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive adjustments for smaller desktop screens */
+@media (max-width: 1200px) {
+  .app-sidebar {
+    width: 35%;
+    min-width: 280px;
+  }
+
+  .app-chat {
+    width: 65%;
+  }
+}
+
+/* Ensure proper layout on Mac M1 screens */
+@media (min-width: 1400px) {
+  .app-main {
+    /* Full screen layout - no margins or max-width constraints */
+  }
+}

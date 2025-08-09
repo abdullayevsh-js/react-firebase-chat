@@ -1,0 +1,94 @@
+{
+    "user_me": {
+        "id": "qc9azFoo6vXbewZboOdqS3mjkid2",
+        "avatar": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
+        "username": "username",
+        "email": "my@email.com"
+    },
+    "other_users": [
+        {
+            "id": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+            "avatar": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
+            "username": "user01",
+            "email": "user01@email.com"
+        }
+    ],
+    "chats": [
+        {
+            "id": "FlMdgIKb7A2nQZN7csKr",
+            "createdAt": "7 August 2025 at 17:46:29 UTC+5",
+            "messages": [
+                {
+                    "createdAt": "7 August 2025 at 18:06:47 UTC+5",
+                    "senderId": "qc9azFoo6vXbewZboOdqS3mjkid2",
+                    "text": "helo"
+                },
+                {
+                    "createdAt": "7 August 2025 at 18:07:27 UTC+5",
+                    "senderId": "qc9azFoo6vXbewZboOdqS3mjkid2",
+                    "text": "hello there"
+                },
+                {
+                    "createdAt": "7 August 2025 at 18:17:27 UTC+5",
+                    "senderId": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+                    "text": "hello my boy"
+                },
+                {
+                    "createdAt": "8 August 2025 at 19:17:27 UTC+5",
+                    "senderId": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+                    "text": "hello my boy, tmp again"
+                },
+                {
+                    "createdAt": "8 August 2025 at 19:17:27 UTC+5",
+                    "senderId": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+                    "text": "hello my boy, tmp again"
+                },
+                {
+                    "createdAt": "8 August 2025 at 19:17:27 UTC+5",
+                    "senderId": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+                    "text": "hello my boy, tmp again"
+                },
+                {
+                    "createdAt": "8 August 2025 at 19:17:27 UTC+5",
+                    "senderId": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+                    "text": "hello my boy, tmp again"
+                },
+                {
+                    "createdAt": "8 August 2025 at 19:17:27 UTC+5",
+                    "senderId": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+                    "text": "hello my boy, tmp again"
+                },
+                {
+                    "createdAt": "8 August 2025 at 19:17:27 UTC+5",
+                    "senderId": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+                    "text": "hello my boy, tmp again"
+                },
+                {
+                    "createdAt": "8 August 2025 at 19:17:27 UTC+5",
+                    "senderId": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+                    "text": "hello my boy, tmp again"
+                },
+                {
+                    "createdAt": "8 August 2025 at 19:17:27 UTC+5",
+                    "senderId": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+                    "text": "hello my boy, tmp again"
+                },
+                {
+                    "createdAt": "8 August 2025 at 19:17:27 UTC+5",
+                    "senderId": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+                    "text": "hello my boy, tmp again"
+                }
+            ]
+        }
+    ],
+    "userchats": [
+        {
+            "id": "qc9azFoo6vXbewZboOdqS3mjkid2",
+            "chatId": "FlMdgIKb7A2nQZN7csKr",
+            "isSeen": true,
+            "lastMessage": "hello my boy",
+            "receiverId": "HEKFxLN2B5TjbQvl45Udq0CCxl32",
+            "updatedAt": 1754572227359
+        }
+    ]
+}
