@@ -3,50 +3,69 @@ import useAppStore from '../../lib/appStore.js';
 import './login.css';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
+  const [identifierError, setIdentifierError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [loginError, setLoginError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
   const { loginUser } = useAppStore();
-
-  // Basic email format validation
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Clear previous errors
-    setEmailError('');
+    setIdentifierError('');
+    setPasswordError('');
+    setLoginError('');
     
-    // Validate email format
-    if (!email.trim()) {
-      setEmailError('Email is required');
+    // Validate inputs
+    if (!identifier.trim()) {
+      setIdentifierError('Username or email is required');
       return;
     }
     
-    if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address');
+    if (!password.trim()) {
+      setPasswordError('Password is required');
       return;
     }
 
-    // Show loading state for smooth transition
+    // Show loading state
     setIsLoading(true);
     
-    // Simulate a brief loading delay for premium feel
-    setTimeout(() => {
-      loginUser(email);
+    try {
+      const result = await loginUser(identifier, password);
+      
+      if (!result.success) {
+        setLoginError(result.error || 'Login failed');
+      }
+    } catch (error) {
+      setLoginError('An unexpected error occurred');
+    } finally {
       setIsLoading(false);
-    }, 800);
+    }
   };
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    // Clear error when user starts typing
-    if (emailError) {
-      setEmailError('');
+  const handleIdentifierChange = (e) => {
+    setIdentifier(e.target.value);
+    // Clear errors when user starts typing
+    if (identifierError) {
+      setIdentifierError('');
+    }
+    if (loginError) {
+      setLoginError('');
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    // Clear errors when user starts typing
+    if (passwordError) {
+      setPasswordError('');
+    }
+    if (loginError) {
+      setLoginError('');
     }
   };
 
@@ -55,22 +74,40 @@ const Login = () => {
       <div className="login-card">
         <div className="login-header">
           <h1>Welcome to Chat</h1>
-          <p>Enter your email to continue</p>
+          <p>Enter your credentials to continue</p>
         </div>
         
         <form onSubmit={handleSubmit} className="login-form">
           <div className="input-group">
             <input
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Enter your email"
-              className={`email-input ${emailError ? 'error' : ''}`}
+              type="text"
+              value={identifier}
+              onChange={handleIdentifierChange}
+              placeholder="Username or email"
+              className={`email-input ${identifierError ? 'error' : ''}`}
               disabled={isLoading}
               autoFocus
             />
-            {emailError && <span className="error-message">{emailError}</span>}
+            {identifierError && <span className="error-message">{identifierError}</span>}
           </div>
+
+          <div className="input-group">
+            <input
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder="Password"
+              className={`email-input ${passwordError ? 'error' : ''}`}
+              disabled={isLoading}
+            />
+            {passwordError && <span className="error-message">{passwordError}</span>}
+          </div>
+
+          {loginError && (
+            <div className="input-group">
+              <span className="error-message">{loginError}</span>
+            </div>
+          )}
           
           <button 
             type="submit" 
@@ -80,13 +117,13 @@ const Login = () => {
             {isLoading ? (
               <div className="loading-spinner"></div>
             ) : (
-              'Continue'
+              'Sign In'
             )}
           </button>
         </form>
         
         <div className="login-footer">
-          <p>No password required - just enter your email to get started</p>
+          <p>Enter your username/email and password to access your chats</p>
         </div>
       </div>
     </div>

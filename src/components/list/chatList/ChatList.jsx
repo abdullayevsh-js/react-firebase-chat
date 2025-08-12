@@ -1,20 +1,16 @@
 import { useState, useEffect } from 'react'
 import './chatList.css'
-import mockDataManager from '../../../lib/mockData.js'
 import useAppStore from '../../../lib/appStore.js'
 
 function ChatList() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [chatList, setChatList] = useState([])
   const [filteredChats, setFilteredChats] = useState([])
-  const { selectChat, selectedChatId } = useAppStore()
+  const { selectChat, selectedChatId, chatList, isLoading } = useAppStore()
 
   useEffect(() => {
-    // Load chat list with user information
-    const chats = mockDataManager.getChatListWithUserInfo()
-    setChatList(chats)
-    setFilteredChats(chats)
-  }, [])
+    // Use chat list from store (loaded via real API)
+    setFilteredChats(chatList)
+  }, [chatList])
 
   useEffect(() => {
     // Filter chats based on search term
@@ -91,7 +87,11 @@ function ChatList() {
 
       {/* Chat Items */}
       <div className="chat-items-container">
-        {filteredChats.length === 0 ? (
+        {isLoading ? (
+          <div className="chat-item--no-chats">
+            Loading conversations...
+          </div>
+        ) : filteredChats.length === 0 ? (
           <div className="chat-item--no-chats">
             {searchTerm ? 'No conversations found' : 'No conversations yet'}
           </div>

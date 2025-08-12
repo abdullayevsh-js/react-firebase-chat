@@ -36,7 +36,7 @@ function Chat() {
   }
 
   // Get the other user in the chat for header display
-  const otherUser = getOtherUserInChat(selectedChatId, currentUser?.id)
+  const otherUser = getOtherUserInChat(currentChat, currentUser?.id)
 
   return (
     <div className="chat">
@@ -75,7 +75,7 @@ function Chat() {
             
             return (
               <div 
-                key={`${message.createdAt}-${index}`}
+                key={message.id || `${message.createdAt}-${index}`}
                 className={`message ${isOwn ? 'message-own' : 'message-other'}`}
               >
                 {showAvatar && (

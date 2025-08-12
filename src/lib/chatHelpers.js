@@ -1,5 +1,3 @@
-import mockDataManager from './mockData.js';
-
 /**
  * Helper functions for chat selection and user management
  * Provides utility functions for common chat operations
@@ -66,37 +64,48 @@ export const isMessageFromCurrentUser = (message, currentUserId) => {
 
 /**
  * Get the other user in a chat (not the current user)
- * @param {string} chatId - Chat ID
+ * This function now expects the chat data to be passed in to avoid circular dependencies
+ * @param {Object} currentChat - Current chat object
  * @param {string} currentUserId - Current user ID
  * @returns {Object|null} Other user object
  */
-export const getOtherUserInChat = (chatId, currentUserId) => {
-  const userChats = mockDataManager.getUserChats();
-  const userChat = userChats.find(uc => uc.chatId === chatId);
+export const getOtherUserInChat = (currentChat, currentUserId) => {
+  if (!currentChat) return null;
   
-  if (!userChat) return null;
-  
-  // If current user is the owner of the userChat, get the receiver
-  if (userChat.id === currentUserId) {
-    return mockDataManager.getUserById(userChat.receiverId);
+  // For DM chats, return the other user
+  if (currentChat.type === 'dm') {
+    // If the chat user is not the current user, return the chat user
+    if (currentChat.user?.id !== currentUserId) {
+      return currentChat.user;
+    }
+    // Otherwise, try to find the receiver info
+    if (currentChat.receiverId && currentChat.receiverId !== currentUserId) {
+      return {
+        id: currentChat.receiverId,
+        username: currentChat.user?.username || 'Unknown',
+        avatar: currentChat.user?.avatar || '/avatar.png'
+      };
+    }
   }
   
-  // Otherwise, get the owner
-  return mockDataManager.getUserById(userChat.id);
+  // For groups and channels, return the chat info as user
+  return currentChat.user || {
+    id: currentChat.id,
+    username: currentChat.user?.username || 'Unknown',
+    avatar: currentChat.user?.avatar || '/avatar.png'
+  };
 };
 
 /**
  * Get unread message count for a chat
- * @param {string} chatId - Chat ID
+ * This function now expects the chat data to be passed in to avoid circular dependencies
+ * @param {Object} chat - Chat object
  * @returns {number} Number of unread messages
  */
-export const getUnreadCount = (chatId) => {
-  const userChats = mockDataManager.getUserChats();
-  const userChat = userChats.find(uc => uc.chatId === chatId);
+export const getUnreadCount = (chat) => {
+  if (!chat || chat.isSeen) return 0;
   
-  if (!userChat || userChat.isSeen) return 0;
-  
-  // For mock data, we'll just return 1 if not seen
+  // Return 1 if not seen (can be enhanced later with actual unread count)
   return 1;
 };
 
